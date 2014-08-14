@@ -1,0 +1,21 @@
+apply plugin: 'groovy'
+
+version = '1.0'
+
+repositories {
+    if( project.hasProperty('internalArtifactRepository') ){
+        maven { url project.internalArtifactRepository }
+    } else {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0', {
+        exclude module: "groovy-all"
+    }
+}
