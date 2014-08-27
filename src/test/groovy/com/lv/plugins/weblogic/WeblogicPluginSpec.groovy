@@ -1,27 +1,101 @@
 package com.lv.plugins.weblogic
 
-import org.gradle.api.Project
-import org.gradle.testfixtures.ProjectBuilder
-import spock.lang.Specification
+import com.lv.plugins.weblogic.tasks.WLDeployTask
+import nebula.test.PluginProjectSpec
+import org.gradle.api.Task
+import org.gradle.api.artifacts.Configuration
+
 
 /**
  * Created by Sion Williams on 14/08/2014.
  */
-class WeblogicPluginSpec extends Specification {
-    Project project
+class WeblogicPluginSpec extends PluginProjectSpec {
+    static final String PLUGIN_ID = 'com.lv.weblogic'
 
-    void setup() {
-        project = ProjectBuilder.builder().build()
+    @Override
+    String getPluginName() {
+        return PLUGIN_ID
     }
 
-    void 'Applies plugins and confirms tasks are added'(){
-        expect: 'no plugin tasks available in the project initially'
-            project.tasks.findByName( WeblogicPlugin.WLDEPLOY_TASK_NAME ) == null
+    def setup() {
+        project.apply plugin: pluginName
+    }
 
-        when: 'I explicitly add the plugin'
-            project.apply plugin: 'com.lv.weblogic'
+    def "apply creates weblogic configuration" () {
+        expect: project.configurations.findByName('weblogic') instanceof Configuration
+    }
 
-        then:
-            project.tasks.findByName( WeblogicPlugin.WLDEPLOY_TASK_NAME )
+    def "apply creates wlDeploy extension" () {
+        expect: project.extensions.findByName('wlDeploy')
+    }
+
+    def "apply creates wlDeploy task" () {
+        setup:
+            Task task = project.tasks.findByName('wlDeploy')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'deploy'
+    }
+
+    def "apply creates wlUndeploy task" () {
+        setup:
+            Task task = project.tasks.findByName('wlUndeploy')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'undeploy'
+    }
+
+    def "apply creates wlCancel task" () {
+        setup:
+            Task task = project.tasks.findByName('wlCancel')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'cancel'
+    }
+
+    def "apply creates wlRedeploy task" () {
+        setup:
+            Task task = project.tasks.findByName('wlRedeploy')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'redeploy'
+    }
+
+    def "apply creates wlDistribute task" () {
+        setup:
+            Task task = project.tasks.findByName('wlDistribute')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'distribute'
+    }
+
+    def "apply creates wlStart task" () {
+        setup:
+            Task task = project.tasks.findByName('wlStart')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'start'
+    }
+
+    def "apply creates wlStop task" () {
+        setup:
+            Task task = project.tasks.findByName('wlStop')
+
+        expect:
+            task != null
+            task instanceof WLDeployTask
+            task.action == 'stop'
     }
 }

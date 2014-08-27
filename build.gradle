@@ -15,7 +15,5 @@ dependencies {
     compile localGroovy()
     compile gradleApi()
 
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0', {
-        exclude module: "groovy-all"
-    }
+    testCompile 'com.netflix.nebula:nebula-test:1.9.8'
 }
