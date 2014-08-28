@@ -1,6 +1,7 @@
 package com.lv.plugins.weblogic.tasks
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
@@ -9,7 +10,7 @@ import org.gradle.api.tasks.TaskAction
  * Custom Gradle task wrapping the Ant WLDeploy task
  * @author Sion Williams
  */
-class WLDeployTask extends DefaultTask{
+class WLDeployTask extends DefaultTask {
 
     /**
      * The deployment action to perform.
@@ -84,14 +85,27 @@ class WLDeployTask extends DefaultTask{
     boolean verbose = false
 
     @TaskAction
-    void runWlDeployCommand(){
+    void runWlDeployCommand() {
+        logger.quiet "*****************************************"
+        logger.quiet "Application name : ${getDeploymentName()}"
+        logger.quiet " action : ${getAction()}"
+        logger.quiet " source : ${getSource()}"
+        logger.quiet " adminurl : ${getAdminurl()}"
+        logger.quiet " targets : ${getTargets()}"
+        logger.quiet "*****************************************"
+
         ant.taskdef( name: 'wldeploy',
                 classname: 'weblogic.ant.taskdefs.management.WLDeploy',
                 classpath: project.configurations.weblogic.asPath )
-
-        ant.wldeploy( action: getAction(), verbose: getVerbose(), debug: getDebug(),
-                name: getDeploymentName(), source: getSource(),
-                user: getUser(), password: getPassword(),
-                adminurl: getAdminurl(), targets: getTargets())
+        ant.wldeploy(action: getAction(),
+                source: getSource(),
+                name: getDeploymentName(),
+                adminurl: getAdminurl(),
+                user: getUser(),
+                password: getPassword(),
+                targets: getTargets(),
+                verbose: getVerbose(),
+                debug: getDebug()
+        )
     }
 }

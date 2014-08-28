@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        maven { url "file://${projectDir}/libs" }
+
+    }
+
+    dependencies {
+        classpath 'com.lv.plugins:gradle-weblogic-plugin:1.0'
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'com.lv.weblogic'
+
+repositories {
+    if( project.hasProperty('internalArtifactRepository') ){
+        maven { url project.internalArtifactRepository }
+    } else {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compile group: 'commons-io', name: 'commons-io', version: '1.4'
+    compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+
+    weblogic files("${projectDir}/libs/wlfullclient.jar")
+}
+
+println war.archivePath
+
+ext.archiveFile = war.archivePath
+
+wlDeploy {
+    adminurl = 't3://wl-l50dev2-1c-middle.group.net:7001/'
+    user = 'l50deploy'
+    password = 'l50d3ploy'
+    source = archiveFile
+    deploymentName = project.name
+    targets = 'AdminServer'
+    debug = true
+    verbose = true
+}
