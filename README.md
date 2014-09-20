@@ -2,7 +2,9 @@
 
 This plugin is a direct port from the Ant equivalents found at [wldeploy Ant Task Reference](http://docs.oracle.com/cd/E13222_01/wls/docs92/programming/wldeploy.html)
 
+## Build Status
 
+[![Build Status](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin.svg?branch=master)](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin)
 ## Usage
 
 To use the plugin, configure your `build.gradle` script and add the plugin:
