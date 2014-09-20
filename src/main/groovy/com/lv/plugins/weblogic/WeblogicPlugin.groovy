@@ -8,7 +8,7 @@ import org.gradle.api.Project
  * Created by Sion Williams on 14/08/2014.
  */
 class WeblogicPlugin implements Plugin<Project> {
-    static final WL_DEPLOY_EXTENSION = 'wlDeploy'
+    static final WL_DEPLOY_EXTENSION = 'weblogic'
     static final WL_DEPLOY_TASK_NAME = 'wlDeploy'
     static final WL_UNDEPLOY_TASK_NAME = 'wlUndeploy'
     static final WL_CANCEL_TASK_NAME = 'wlCancel'
@@ -45,6 +45,8 @@ class WeblogicPlugin implements Plugin<Project> {
             conventionMapping.password = { extension.password }
             conventionMapping.debug = { extension.debug }
             conventionMapping.verbose = { extension.verbose }
+            conventionMapping.remote = { extension.remote }
+            conventionMapping.upload = { extension.upload }
 
         }
 

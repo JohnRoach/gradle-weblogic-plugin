@@ -1,13 +1,14 @@
 package com.lv.plugins.weblogic.tasks
 
 import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 /**
  * Custom Gradle task wrapping the Ant WLDeploy task
+ * http://docs.oracle.com/cd/E11035_01/wls100/programming/wldeploy.html
+ *
  * @author Sion Williams
  */
 class WLDeployTask extends DefaultTask {
@@ -74,7 +75,7 @@ class WLDeployTask extends DefaultTask {
      */
     @Input
     @Optional
-    boolean debug = false
+    Boolean debug = false
 
 
     /**
@@ -82,7 +83,22 @@ class WLDeployTask extends DefaultTask {
      */
     @Input
     @Optional
-    boolean verbose = false
+    Boolean verbose = false
+
+    /**
+     * Specifies whether the server is located on a different machine.
+     */
+    @Input
+    @Optional
+    Boolean remote = false
+
+    /**
+     * Specifies whether the source file(s) are copied to the Administration Server’s upload directory prior to deployment.
+     */
+    @Input
+    @Optional
+    Boolean upload = false
+
 
     @TaskAction
     void runWlDeployCommand() {
@@ -105,7 +121,9 @@ class WLDeployTask extends DefaultTask {
                 password: getPassword(),
                 targets: getTargets(),
                 verbose: getVerbose(),
-                debug: getDebug()
+                debug: getDebug(),
+                remote: getRemote(),
+                upload: getUpload()
         )
     }
 }

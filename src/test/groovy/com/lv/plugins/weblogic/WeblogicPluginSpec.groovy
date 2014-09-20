@@ -25,8 +25,23 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect: project.configurations.findByName('weblogic') instanceof Configuration
     }
 
-    def "apply creates wlDeploy extension" () {
-        expect: project.extensions.findByName('wlDeploy')
+    def "apply creates weblogic extension" () {
+        expect: project.extensions.findByName('weblogic')
+    }
+
+    def "apply creates tasks of type WLDeployTask with default values"() {
+        setup:
+            Task task = project.tasks.findByName('wlDeploy')
+
+        expect:
+            task != null
+            task.adminurl == 't3://localhost:7001'
+            task.user == 'weblogic'
+            task.password == 'welcome1'
+            task.debug == false
+            task.verbose == false
+            task.remote == false
+            task.upload == false
     }
 
     def "apply creates wlDeploy task" () {

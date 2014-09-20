@@ -24,7 +24,7 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '1.4'
     compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
 
-    weblogic files("${projectDir}/libs/wlfullclient.jar")
+    weblogic files("${projectDir}/libs/wlfullclient-1036.jar", "${projectDir}/libs/crypto-1036.jar")
 }
 
 println war.archivePath
@@ -32,12 +32,14 @@ println war.archivePath
 ext.archiveFile = war.archivePath
 
 wlDeploy {
-    adminurl = 't3://wl-l50dev2-1c-middle.group.net:7001/'
-    user = 'l50deploy'
-    password = 'l50d3ploy'
+    adminurl = 't3://localhost:7001'
+    user = 'weblogic'
+    password = 'welcome1'
     source = archiveFile
     deploymentName = project.name
     targets = 'AdminServer'
     debug = true
     verbose = true
+    remote = true
+    upload = true
 }

@@ -11,7 +11,9 @@ class WLDeployPluginExtension {
     String source
     String targets
     String user = 'weblogic'
-    String password = 'password'
-    boolean debug = false
-    boolean verbose = false
+    String password = 'welcome1'
+    Boolean debug = false
+    Boolean verbose = false
+    Boolean remote = false
+    Boolean upload = false
 }

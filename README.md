@@ -32,7 +32,7 @@ The plugin adds 7 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `
 
 ### build.gradle
 ```groovy
-    wlDeploy {
+    weblogic {
             adminurl = 't3://localhost:7001'
             appversion
             deploymentName = 'myUberApp'
@@ -57,3 +57,5 @@ The plugin adds 7 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `
 * `password` : The administrative password. Default 'welcome1'
 * `debug` : Enable wldeploy debugging messages. Default 'false'.
 * `verbose` : Specifies whether wldeploy displays verbose output messages. Default 'false'. 
+* `remote` : Specifies whether the server is located on a different machine.
+* `upload` : Specifies whether the source file(s) are copied to the Administration Server’s upload directory prior to deployment.
