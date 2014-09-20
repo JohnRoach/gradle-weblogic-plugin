@@ -13,6 +13,10 @@ import org.gradle.api.tasks.TaskAction
  */
 class WLDeployTask extends DefaultTask {
 
+    WLDeployTask(){
+        group = 'Weblogic'
+    }
+
     /**
      * The deployment action to perform.
      * Valid values are deploy, cancel, undeploy, redeploy, distribute, start, and stop.
