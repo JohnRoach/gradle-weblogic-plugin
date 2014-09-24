@@ -3,25 +3,24 @@ package com.lv.plugins.weblogic.tasks
 /**
  * @author Sion Williams
  */
-class WLDeployTask extends AbstractWLDeployTask {
+class WLUndeployTask extends AbstractWLDeployTask {
 
     /**
      * The deployment action to perform.
      */
-    static final String ACTION = 'deploy'
+    static final String ACTION = 'undeploy'
 
     /**
      * Constructor.
      */
-    WLDeployTask() {
-        super( 'Deploys or redeploys an application or module.' )
+    WLUndeployTask() {
+        super( 'Stops the deployment unit and removes staged files from target servers.' )
     }
 
     @Override
     void runWlDeployCommand() {
 
         ant.wldeploy(action: ACTION,
-                source: getSource(),
                 name: getDeploymentName(),
                 adminurl: getAdminurl(),
                 user: getUser(),

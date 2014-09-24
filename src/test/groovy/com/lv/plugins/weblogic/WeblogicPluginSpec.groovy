@@ -1,6 +1,8 @@
 package com.lv.plugins.weblogic
 
 import com.lv.plugins.weblogic.tasks.WLDeployTask
+import com.lv.plugins.weblogic.tasks.WLRedeployTask
+import com.lv.plugins.weblogic.tasks.WLUndeployTask
 import nebula.test.PluginProjectSpec
 import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
@@ -52,7 +54,7 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect:
             task != null
             task instanceof WLDeployTask
-            task.action == 'deploy'
+            task.ACTION == 'deploy'
             task.description == 'Deploys or redeploys an application or module.'
     }
 
@@ -62,8 +64,8 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'undeploy'
+            task instanceof WLUndeployTask
+            task.ACTION == 'undeploy'
             task.description == 'Stops the deployment unit and removes staged files from target servers.'
     }
 
@@ -74,7 +76,7 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect:
             task != null
             task instanceof WLDeployTask
-            task.action == 'cancel'
+            task.ACTION == 'cancel'
             task.description == 'Attempt to cancel a running deployment task.'
     }
 
@@ -84,8 +86,8 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'redeploy'
+            task instanceof WLRedeployTask
+            task.ACTION == 'redeploy'
             task.description == 'Redeploys a running application or part of a running application.'
     }
 
@@ -96,7 +98,7 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect:
             task != null
             task instanceof WLDeployTask
-            task.action == 'distribute'
+            task.ACTION == 'distribute'
             task.description == 'Prepares deployment files for deployment by copying deployment files to target servers and validating them.'
     }
 
@@ -107,7 +109,7 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect:
             task != null
             task instanceof WLDeployTask
-            task.action == 'start'
+            task.ACTION == 'start'
             task.description == 'Makes a stopped (inactive) application available to clients on target servers.'
     }
 
@@ -118,7 +120,7 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect:
             task != null
             task instanceof WLDeployTask
-            task.action == 'stop'
+            task.ACTION == 'stop'
             task.description == 'Makes an application inactive and unavailable administration and client requests.'
     }
 }

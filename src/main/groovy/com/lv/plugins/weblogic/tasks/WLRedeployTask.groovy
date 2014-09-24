@@ -1,27 +1,36 @@
 package com.lv.plugins.weblogic.tasks
 
+import org.gradle.api.tasks.Input
+
 /**
  * @author Sion Williams
  */
-class WLDeployTask extends AbstractWLDeployTask {
+class WLRedeployTask extends AbstractWLDeployTask {
 
     /**
      * The deployment action to perform.
      */
-    static final String ACTION = 'deploy'
+    static final String ACTION = 'redeploy'
+
+    /**
+     * Specifies a comma- or space-separated list of files, relative to the root directory of the application,
+     * which are to be redeployed.
+     */
+    @Input
+    String deltaFiles
 
     /**
      * Constructor.
      */
-    WLDeployTask() {
-        super( 'Deploys or redeploys an application or module.' )
+    WLRedeployTask() {
+        super( 'Redeploys a running application or part of a running application.' )
     }
 
     @Override
     void runWlDeployCommand() {
 
         ant.wldeploy(action: ACTION,
-                source: getSource(),
+                deltaFiles: getDeltaFiles(),
                 name: getDeploymentName(),
                 adminurl: getAdminurl(),
                 user: getUser(),
