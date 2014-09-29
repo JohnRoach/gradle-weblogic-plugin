@@ -51,6 +51,7 @@ class WLDeployTask extends DefaultTask {
      * The archive file or exploded directory to deploy.
      */
     @Input
+    @Optional
     String source
 
 
@@ -65,14 +66,14 @@ class WLDeployTask extends DefaultTask {
      * The administrative username.
      */
     @Input
-    String user = 'weblogic'
+    String user
 
 
     /**
      * The administrative password.
      */
     @Input
-    String password = 'welcome1'
+    String password
 
     /**
      * Enable wldeploy debugging messages.
@@ -103,6 +104,7 @@ class WLDeployTask extends DefaultTask {
     @Optional
     Boolean upload = false
 
+    def antBuilderMap = [:]
 
     @TaskAction
     void runWlDeployCommand() {
@@ -114,20 +116,38 @@ class WLDeployTask extends DefaultTask {
         logger.quiet " targets : ${getTargets()}"
         logger.quiet "*****************************************"
 
+        antBuilderMap = [:]
+
+        antBuilderMap << [action: getAction(),
+                          name: getDeploymentName(),
+                          adminurl: getAdminurl(),
+                          user: getUser(),
+                          password: getPassword(),
+                          targets: getTargets() ]
+
+        if( getAppversion() ){
+            antBuilderMap << [appversion: getAppversion()]
+        }
+
+        if( getSource() ){
+            antBuilderMap << [source: getSource()]
+        }
+
+        if( getDebug() ){
+            antBuilderMap << [debug: getDebug()]
+        }
+
+        if( getVerbose() ){
+            antBuilderMap << [verbose: getVerbose()]
+        }
+
+        if( getRemote() ){
+            antBuilderMap << [remote: getRemote()]
+        }
+
         ant.taskdef( name: 'wldeploy',
                 classname: 'weblogic.ant.taskdefs.management.WLDeploy',
                 classpath: project.configurations.weblogic.asPath )
-        ant.wldeploy(action: getAction(),
-                source: getSource(),
-                name: getDeploymentName(),
-                adminurl: getAdminurl(),
-                user: getUser(),
-                password: getPassword(),
-                targets: getTargets(),
-                verbose: getVerbose(),
-                debug: getDebug(),
-                remote: getRemote(),
-                upload: getUpload()
-        )
+        ant.wldeploy( antBuilderMap )
     }
 }

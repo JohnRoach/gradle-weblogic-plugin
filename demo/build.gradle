@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.lv.plugins:gradle-weblogic-plugin:1.0'
+        classpath 'com.lv.plugins:gradle-weblogic-plugin:0.2'
     }
 }
 
@@ -24,7 +24,8 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '1.4'
     compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
 
-    weblogic files("${projectDir}/libs/wlfullclient-1036.jar", "${projectDir}/libs/crypto-1036.jar")
+    //weblogic files("${projectDir}/libs/wlfullclient-1036.jar", "${projectDir}/libs/crypto-1036.jar")
+    weblogic group: 'com.oracle', name: 'wlfullclient', version: '10.3.6'
 }
 
 println war.archivePath
