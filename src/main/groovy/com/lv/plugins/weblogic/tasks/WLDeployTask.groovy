@@ -104,7 +104,10 @@ class WLDeployTask extends DefaultTask {
     @Optional
     Boolean upload = false
 
-    def antBuilderMap = [:]
+    /**
+     * A map for dynamically changing the configurations of the ant builder call.
+     */
+    def antBuilderInput = [:]
 
     @TaskAction
     void runWlDeployCommand() {
@@ -116,38 +119,42 @@ class WLDeployTask extends DefaultTask {
         logger.quiet " targets : ${getTargets()}"
         logger.quiet "*****************************************"
 
-        antBuilderMap = [:]
+        antBuilderInput = [:]
 
-        antBuilderMap << [action: getAction(),
+        antBuilderInput << [ action: getAction(),
                           name: getDeploymentName(),
                           adminurl: getAdminurl(),
                           user: getUser(),
                           password: getPassword(),
                           targets: getTargets() ]
 
-        if( getAppversion() ){
-            antBuilderMap << [appversion: getAppversion()]
+        if( getAppversion() ) {
+            antBuilderInput << [ appversion: getAppversion() ]
         }
 
-        if( getSource() ){
-            antBuilderMap << [source: getSource()]
+        if( getSource() ) {
+            antBuilderInput << [ source: getSource() ]
         }
 
-        if( getDebug() ){
-            antBuilderMap << [debug: getDebug()]
+        if( getDebug() ) {
+            antBuilderInput << [ debug: getDebug() ]
         }
 
-        if( getVerbose() ){
-            antBuilderMap << [verbose: getVerbose()]
+        if( getVerbose() ) {
+            antBuilderInput << [ verbose: getVerbose() ]
         }
 
-        if( getRemote() ){
-            antBuilderMap << [remote: getRemote()]
+        if( getRemote() ) {
+            antBuilderInput << [ remote: getRemote() ]
+        }
+
+        if( getUpload() ) {
+            antBuilderInput << [ upload: getUpload() ]
         }
 
         ant.taskdef( name: 'wldeploy',
                 classname: 'weblogic.ant.taskdefs.management.WLDeploy',
                 classpath: project.configurations.weblogic.asPath )
-        ant.wldeploy( antBuilderMap )
+        ant.wldeploy( antBuilderInput )
     }
 }
