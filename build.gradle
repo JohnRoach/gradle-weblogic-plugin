@@ -45,7 +45,7 @@ task integTest(type: Test) {
     classpath = sourceSets.integTest.runtimeClasspath
 }
 
-check.dependsOn integTest
+//check.dependsOn integTest
 
 /**
  * FOR DEMO PROJECT
