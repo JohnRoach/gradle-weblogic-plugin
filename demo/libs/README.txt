@@ -1,1 +1,0 @@
-Please place the wlfullclient.jar here.
