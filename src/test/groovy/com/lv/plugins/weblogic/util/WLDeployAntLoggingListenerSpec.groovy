@@ -66,6 +66,6 @@ class WLDeployAntLoggingListenerSpec extends Specification {
             buildListener.messageLogged( buildEvent )
 
         then:
-            0 * mockLogger.lifecycle('Weblogic started')
+            1 * mockLogger.lifecycle('Weblogic started')
     }
 }
