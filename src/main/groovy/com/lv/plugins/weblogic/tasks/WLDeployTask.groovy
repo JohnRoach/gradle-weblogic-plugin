@@ -1,5 +1,6 @@
 package com.lv.plugins.weblogic.tasks
 
+import com.lv.plugins.weblogic.util.LoggingHandler
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
@@ -152,9 +153,11 @@ class WLDeployTask extends DefaultTask {
             antBuilderInput << [ upload: getUpload() ]
         }
 
-        ant.taskdef( name: 'wldeploy',
-                classname: 'weblogic.ant.taskdefs.management.WLDeploy',
-                classpath: project.configurations.weblogic.asPath )
-        ant.wldeploy( antBuilderInput )
+        LoggingHandler.withAntLoggingListener( ant ) {
+            ant.taskdef( name: 'wldeploy',
+                    classname: 'weblogic.ant.taskdefs.management.WLDeploy',
+                    classpath: project.configurations.weblogic.asPath )
+            ant.wldeploy( antBuilderInput )
+        }
     }
 }

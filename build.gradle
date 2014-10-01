@@ -20,7 +20,7 @@ dependencies {
     compile gradleApi()
 
     testCompile group: 'com.netflix.nebula', name: 'nebula-test', version: '1.12.+'
-    testCompile group: 'com.oracle', name: 'wlfullclient', version: '10.3.6'
+    testCompile files("${projectDir}/demo/libs/wlfullclient-1036.jar")
 }
 
 sourceSets {
