@@ -19,7 +19,8 @@ dependencies {
     compile localGroovy()
     compile gradleApi()
 
-    testCompile 'com.netflix.nebula:nebula-test:1.12.+'
+    testCompile group: 'com.netflix.nebula', name: 'nebula-test', version: '1.12.+'
+    testCompile group: 'com.oracle', name: 'wlfullclient', version: '10.3.6'
 }
 
 sourceSets {

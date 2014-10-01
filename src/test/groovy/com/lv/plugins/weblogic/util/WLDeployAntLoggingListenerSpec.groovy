@@ -1,13 +1,13 @@
 package com.lv.plugins.weblogic.util
 
-import com.lv.plugins.weblogic.tasks.WLDeployTask
 import org.apache.tools.ant.BuildEvent
 import org.apache.tools.ant.BuildListener
 import org.apache.tools.ant.Project
+import org.apache.tools.ant.Task
 import org.apache.tools.ant.taskdefs.Copy
-import org.gradle.api.Task
 import org.gradle.api.logging.Logger
 import spock.lang.Specification
+import weblogic.ant.taskdefs.management.WLDeploy
 
 /**
  * Cargo Ant build listener unit tests.
@@ -39,7 +39,7 @@ class WLDeployAntLoggingListenerSpec extends Specification {
 
     void 'Message not logged for WLDeploy Ant task with debug priority'() {
         given:
-            Task antWLDeployTask = new WLDeployTask()
+            Task antWLDeployTask = new WLDeploy()
             BuildEvent buildEvent = new BuildEvent( antWLDeployTask )
             buildEvent.message = 'Weblogic started'
             buildEvent.priority = Project.MSG_DEBUG
@@ -55,7 +55,7 @@ class WLDeployAntLoggingListenerSpec extends Specification {
 
     void 'Message is logged for WLDeploy Ant task with info priority'() {
         given:
-            Task antWLDeployTask = new WLDeployTask()
+            Task antWLDeployTask = new WLDeploy()
             BuildEvent buildEvent = new BuildEvent( antWLDeployTask )
             buildEvent.message = 'Weblogic started'
             buildEvent.priority = Project.MSG_INFO
