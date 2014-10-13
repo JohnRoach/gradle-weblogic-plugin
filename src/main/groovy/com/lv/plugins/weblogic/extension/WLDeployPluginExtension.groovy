@@ -1,4 +1,4 @@
-package com.lv.plugins.weblogic
+package com.lv.plugins.weblogic.extension
 
 /**
  * Created by Sion Williams on 27/08/2014.

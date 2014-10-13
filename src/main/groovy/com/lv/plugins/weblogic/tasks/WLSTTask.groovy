@@ -1,5 +1,6 @@
 package com.lv.plugins.weblogic.tasks
 
+import com.google.common.annotations.Beta
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
@@ -9,6 +10,7 @@ import org.gradle.api.tasks.TaskAction
  * Custom Gradle task wrapping the Ant WLST task
  * @author Sion Williams
  */
+@Beta
 class WLSTTask extends DefaultTask{
 
     @Input

@@ -1,7 +1,11 @@
 package com.lv.plugins.weblogic
 
+import com.lv.plugins.weblogic.extension.WLDeployPluginExtension
+import com.lv.plugins.weblogic.tasks.WLCancelTask
 import com.lv.plugins.weblogic.tasks.WLDeployTask
 import com.lv.plugins.weblogic.tasks.WLRedeployTask
+import com.lv.plugins.weblogic.tasks.WLStartTask
+import com.lv.plugins.weblogic.tasks.WLStopTask
 import com.lv.plugins.weblogic.tasks.WLUndeployTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -15,7 +19,6 @@ class WeblogicPlugin implements Plugin<Project> {
     static final WL_UNDEPLOY_TASK_NAME = 'wlUndeploy'
     static final WL_CANCEL_TASK_NAME = 'wlCancel'
     static final WL_REDEPLOY_TASK_NAME = 'wlRedeploy'
-    static final WL_DISTRIBUTE_TASK_NAME = 'wlDistribute'
     static final WL_START_TASK_NAME = 'wlStart'
     static final WL_STOP_TASK_NAME = 'wlStop'
 
@@ -54,10 +57,9 @@ class WeblogicPlugin implements Plugin<Project> {
 
         project.task( WL_DEPLOY_TASK_NAME, type: WLDeployTask )
         project.task( WL_UNDEPLOY_TASK_NAME, type: WLUndeployTask )
-        project.task( WL_CANCEL_TASK_NAME, type: WLDeployTask )
+        project.task( WL_CANCEL_TASK_NAME, type: WLCancelTask )
         project.task( WL_REDEPLOY_TASK_NAME, type: WLRedeployTask )
-        project.task( WL_DISTRIBUTE_TASK_NAME, type: WLDeployTask )
-        project.task( WL_START_TASK_NAME, type: WLDeployTask )
-        project.task( WL_STOP_TASK_NAME, type: WLDeployTask )
+        project.task( WL_START_TASK_NAME, type: WLStartTask )
+        project.task( WL_STOP_TASK_NAME, type: WLStopTask )
     }
 }

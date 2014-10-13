@@ -17,6 +17,7 @@ repositories {
 dependencies {
     compile localGroovy()
     compile gradleApi()
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
 
     testCompile group: 'com.netflix.nebula', name: 'nebula-test', version: '1.12.+'
     testCompile files("${projectDir}/demo/libs/wlfullclient-1036.jar")

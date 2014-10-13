@@ -6,7 +6,7 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * Created by Sion Williams on 30/09/2014.
+ * @author Sion Williams
  */
 class WLDeployTaskSpec extends Specification {
     Project project

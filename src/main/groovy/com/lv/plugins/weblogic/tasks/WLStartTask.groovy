@@ -3,18 +3,18 @@ package com.lv.plugins.weblogic.tasks
 /**
  * @author Sion Williams
  */
-class WLUndeployTask extends AbstractWLDeployTask {
+class WLStartTask extends AbstractWLDeployTask {
 
     /**
      * The deployment action to perform.
      */
-    static final String ACTION = 'undeploy'
+    static final String ACTION = 'start'
 
     /**
      * Constructor.
      */
-    WLUndeployTask() {
-        super( 'Stops the deployment unit and removes staged files from target servers.' )
+    WLStartTask() {
+        super( 'Makes a stopped (inactive) application available to clients on target servers.' )
     }
 
     @Override
@@ -25,14 +25,6 @@ class WLUndeployTask extends AbstractWLDeployTask {
 
         if( getDeploymentName() ) {
             commandArgs << [ name: getDeploymentName() ]
-        }
-
-        if( getTargets() ) {
-            commandArgs << [ targets: getTargets() ]
-        }
-
-        if( getAppversion() ) {
-            commandArgs << [ appversion: getAppversion() ]
         }
 
         commandArgs

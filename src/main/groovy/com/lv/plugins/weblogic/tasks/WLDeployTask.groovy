@@ -21,7 +21,7 @@ class WLDeployTask extends AbstractWLDeployTask {
     def getCommandAndOptions() {
         def commandArgs = [:]
 
-        antBuilderInput << [ action: getAction() ]
+        commandArgs << [ action: ACTION ]
 
         if( getDeploymentName() ) {
             commandArgs << [ name: getDeploymentName() ]
