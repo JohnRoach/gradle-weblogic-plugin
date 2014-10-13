@@ -18,19 +18,31 @@ class WLDeployTask extends AbstractWLDeployTask {
     }
 
     @Override
-    void runWlDeployCommand() {
+    def getCommandAndOptions() {
+        def commandArgs = [:]
 
-        ant.wldeploy(action: ACTION,
-                source: getSource(),
-                name: getDeploymentName(),
-                adminurl: getAdminurl(),
-                user: getUser(),
-                password: getPassword(),
-                targets: getTargets(),
-                verbose: getVerbose(),
-                debug: getDebug(),
-                remote: getRemote(),
-                upload: getUpload()
-        )
+        antBuilderInput << [ action: getAction() ]
+
+        if( getDeploymentName() ) {
+            commandArgs << [ name: getDeploymentName() ]
+        }
+
+        if( getTargets() ) {
+            commandArgs << [ targets: getTargets() ]
+        }
+
+        if( getAppversion() ) {
+            commandArgs << [ appversion: getAppversion() ]
+        }
+
+        if( getSource() ) {
+            commandArgs << [ source: getSource() ]
+        }
+
+        if( getUpload() ) {
+            commandArgs << [ upload: getUpload() ]
+        }
+
+        commandArgs
     }
 }

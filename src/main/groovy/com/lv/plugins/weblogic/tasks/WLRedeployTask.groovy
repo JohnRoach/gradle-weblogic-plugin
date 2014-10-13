@@ -27,7 +27,7 @@ class WLRedeployTask extends AbstractWLDeployTask {
     }
 
     @Override
-    void runWlDeployCommand() {
+    void getCommandAndOptions() {
 
         ant.wldeploy(action: ACTION,
                 deltaFiles: getDeltaFiles(),

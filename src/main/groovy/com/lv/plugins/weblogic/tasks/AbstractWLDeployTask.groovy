@@ -1,5 +1,6 @@
 package com.lv.plugins.weblogic.tasks
 
+import com.lv.plugins.weblogic.util.LoggingHandler
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
@@ -108,15 +109,20 @@ abstract class AbstractWLDeployTask extends DefaultTask {
                 classname: 'weblogic.ant.taskdefs.management.WLDeploy',
                 classpath: project.configurations.weblogic.asPath )
 
+        getAntBuilderInput()
+
         logger.quiet "*****************************************"
-        logger.quiet "Application name : ${getDeploymentName()}"
-        logger.quiet " source : ${getSource()}"
-        logger.quiet " adminurl : ${getAdminurl()}"
-        logger.quiet " targets : ${getTargets()}"
+        logger.quiet "Application name : ${antBuilderInput['name']}"
+        logger.quiet " action : ${antBuilderInput['action']}"
+        logger.quiet " source : ${antBuilderInput['source']}"
+        logger.quiet " adminurl : ${antBuilderInput['adminurl']}"
+        logger.quiet " targets : ${antBuilderInput['targets']}"
         logger.quiet "*****************************************"
 
         withExceptionHandling {
-            runWlDeployCommand()
+            LoggingHandler.withAntLoggingListener( ant ) {
+                ant.wldeploy( antBuilderInput )
+            }
         }
     }
 
@@ -135,7 +141,67 @@ abstract class AbstractWLDeployTask extends DefaultTask {
     }
 
     /**
-     * Abstract task execution method for implementation by subclass.
+     * Provide map representation of the antBuilder arguments
+     *
+     * @return Map of antBuilder arguments
      */
-    abstract void runWlDeployCommand()
+    private def getAntBuilderInput() {
+        antBuilderInput = [:]
+        antBuilderInput += getConnectionArgs()
+        antBuilderInput += getUserCredentialArgs()
+        antBuilderInput += getCommonArgs()
+        antBuilderInput += getCommandAndOptions()
+    }
+
+    /**
+     * Provide map representation of the connection arguments
+     *
+     * @return Map of connection arguments
+     */
+    private def getConnectionArgs() {
+        def connectionArgs = [ adminurl: getAdminurl() ]
+        connectionArgs
+    }
+
+    /**
+     * Provide map representation of the user credentials arguments.
+     *
+     * @return Map of user credentials arguments
+     */
+    private def getUserCredentialArgs() {
+        def userArgs = [ user: getUser(),
+                         password: getPassword() ]
+        userArgs
+    }
+
+    /**
+     * Provide map representation of common arguments.
+     *
+     * @return Map of common arguments set by the user
+     */
+    private def getCommonArgs() {
+        def commonArgs = [:]
+
+        if( getDebug() ) {
+            commonArgs << [ debug: getDebug() ]
+        }
+
+        if( getVerbose() ) {
+            commonArgs << [ verbose: getVerbose() ]
+        }
+
+        if( getRemote() ) {
+            commonArgs << [ remote: getRemote() ]
+        }
+
+        commonArgs
+    }
+
+    /**
+     * Abstract task execution method for implementation by subclass.
+     * Provide map representation of the wldeploy action and options.
+     *
+     * @return Map of the wldeploy command and options set by the user
+     */
+    abstract def getCommandAndOptions()
 }
