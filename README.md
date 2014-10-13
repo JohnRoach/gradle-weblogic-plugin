@@ -2,6 +2,9 @@
 
 This plugin is a direct port from the Ant equivalents found at [wldeploy Ant Task Reference](http://docs.oracle.com/cd/E13222_01/wls/docs92/programming/wldeploy.html)
 
+## Latest Version
+[ ![Download](https://api.bintray.com/packages/lv/gradle-plugins/gradle-weblogic-plugin/images/download.svg) ](https://bintray.com/lv/gradle-plugins/gradle-weblogic-plugin/_latestVersion)
+
 ## Build Status
 
 [![Build Status](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin.svg?branch=master)](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin)
@@ -37,12 +40,14 @@ The plugin adds 6 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `
     weblogic {
             adminurl = 't3://localhost:7001'
             deploymentName = 'myUberApp'
-            source = '${projectDir}/dist/demo.war'
+            source = "${projectDir}/dist/demo.war"
             targets = 'managed01, managed02'
             user = 'weblogic'
             password = 'secret'
             debug = false
             verbose = false
+            upload = true
+            remote = false
     }
 ```
 
