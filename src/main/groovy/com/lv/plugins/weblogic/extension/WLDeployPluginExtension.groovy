@@ -1,17 +1,16 @@
-package com.lv.plugins.weblogic
+package com.lv.plugins.weblogic.extension
 
 /**
- * Created by Sion Williams on 27/08/2014.
+ * @author Sion Williams
  */
 class WLDeployPluginExtension {
-    String action = 'deploy'
     String adminurl = 't3://localhost:7001'
     String appversion
     String deploymentName
     String source
-    String targets
-    String user = 'weblogic'
-    String password = 'welcome1'
+    String targets = 'AdminServer'
+    String user
+    String password
     Boolean debug = false
     Boolean verbose = false
     Boolean remote = false

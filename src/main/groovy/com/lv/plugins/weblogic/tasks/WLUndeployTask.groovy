@@ -3,18 +3,18 @@ package com.lv.plugins.weblogic.tasks
 /**
  * @author Sion Williams
  */
-class WLDeployTask extends AbstractWLDeployTask {
+class WLUndeployTask extends AbstractWLDeployTask {
 
     /**
      * The deployment action to perform.
      */
-    static final String ACTION = 'deploy'
+    static final String ACTION = 'undeploy'
 
     /**
      * Constructor.
      */
-    WLDeployTask() {
-        super( 'Deploys or redeploys an application or module.' )
+    WLUndeployTask() {
+        super( 'Stops the deployment unit and removes staged files from target servers.' )
     }
 
     @Override
@@ -33,14 +33,6 @@ class WLDeployTask extends AbstractWLDeployTask {
 
         if( getAppversion() ) {
             commandArgs << [ appversion: getAppversion() ]
-        }
-
-        if( getSource() ) {
-            commandArgs << [ source: getSource() ]
-        }
-
-        if( getUpload() ) {
-            commandArgs << [ upload: getUpload() ]
         }
 
         commandArgs

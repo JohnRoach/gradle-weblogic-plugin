@@ -1,9 +1,15 @@
 package com.lv.plugins.weblogic
 
+import com.lv.plugins.weblogic.tasks.WLCancelTask
 import com.lv.plugins.weblogic.tasks.WLDeployTask
+import com.lv.plugins.weblogic.tasks.WLRedeployTask
+import com.lv.plugins.weblogic.tasks.WLStartTask
+import com.lv.plugins.weblogic.tasks.WLStopTask
+import com.lv.plugins.weblogic.tasks.WLUndeployTask
 import nebula.test.PluginProjectSpec
 import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
+import spock.lang.Ignore
 
 
 /**
@@ -52,7 +58,7 @@ class WeblogicPluginSpec extends PluginProjectSpec {
         expect:
             task != null
             task instanceof WLDeployTask
-            task.action == 'deploy'
+            task.ACTION == 'deploy'
             task.description == 'Deploys or redeploys an application or module.'
     }
 
@@ -62,8 +68,8 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'undeploy'
+            task instanceof WLUndeployTask
+            task.ACTION == 'undeploy'
             task.description == 'Stops the deployment unit and removes staged files from target servers.'
     }
 
@@ -73,8 +79,8 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'cancel'
+            task instanceof WLCancelTask
+            task.ACTION == 'cancel'
             task.description == 'Attempt to cancel a running deployment task.'
     }
 
@@ -84,20 +90,9 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'redeploy'
+            task instanceof WLRedeployTask
+            task.ACTION == 'redeploy'
             task.description == 'Redeploys a running application or part of a running application.'
-    }
-
-    def "apply creates wlDistribute task" () {
-        setup:
-            Task task = project.tasks.findByName('wlDistribute')
-
-        expect:
-            task != null
-            task instanceof WLDeployTask
-            task.action == 'distribute'
-            task.description == 'Prepares deployment files for deployment by copying deployment files to target servers and validating them.'
     }
 
     def "apply creates wlStart task" () {
@@ -106,8 +101,8 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'start'
+            task instanceof WLStartTask
+            task.ACTION == 'start'
             task.description == 'Makes a stopped (inactive) application available to clients on target servers.'
     }
 
@@ -117,8 +112,20 @@ class WeblogicPluginSpec extends PluginProjectSpec {
 
         expect:
             task != null
-            task instanceof WLDeployTask
-            task.action == 'stop'
+            task instanceof WLStopTask
+            task.ACTION == 'stop'
             task.description == 'Makes an application inactive and unavailable administration and client requests.'
+    }
+
+    @Ignore( "TODO" )
+    def "apply creates wlDistribute task" () {
+        setup:
+        Task task = project.tasks.findByName('wlDistribute')
+
+        expect:
+        task != null
+        task instanceof WLDeployTask
+        task.ACTION == 'distribute'
+        task.description == 'Prepares deployment files for deployment by copying deployment files to target servers and validating them.'
     }
 }

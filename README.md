@@ -28,7 +28,7 @@ The weblogic configuration is added by the plugin, but you will need to specify 
 
 
 # Tasks
-The plugin adds 7 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `wlRedeploy`, `wlDistribute`, `wlStart` and `wlStop`.
+The plugin adds 6 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `wlRedeploy`, `wlStart` and `wlStop`.
 
 ## Configuration
 
@@ -36,10 +36,9 @@ The plugin adds 7 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `
 ```groovy
     weblogic {
             adminurl = 't3://localhost:7001'
-            appversion
             deploymentName = 'myUberApp'
-            source
-            targets
+            source = '${projectDir}/dist/demo.war'
+            targets = 'managed01, managed02'
             user = 'weblogic'
             password = 'secret'
             debug = false
@@ -52,12 +51,12 @@ The plugin adds 7 tasks to your project; `wlDeploy`, `wlUndeploy`, `wlCancel`, `
 
 * `adminurl` : The URL of the Administration Server. Default 't3://localhost:7001'.
 * `appversion` : The version identifier of the deployed application.
-* `deploymentName` : The deployment name for the deployed application. Default ${project.name}.
+* `deploymentName` : The deployment name for the deployed application.
 * `source` : The archive file or exploded directory to deploy.
-* `targets` : The list of target servers to which the application is deployed.
-* `user` : The administrative username. Default 'weblogic'.
-* `password` : The administrative password. Default 'welcome1'
+* `targets` : The list of target servers to which the application is deployed. Default 'AdminServer'
+* `user` : The administrative username.
+* `password` : The administrative password.
 * `debug` : Enable wldeploy debugging messages. Default 'false'.
 * `verbose` : Specifies whether wldeploy displays verbose output messages. Default 'false'. 
-* `remote` : Specifies whether the server is located on a different machine.
-* `upload` : Specifies whether the source file(s) are copied to the Administration Server’s upload directory prior to deployment.
+* `remote` : Specifies whether the server is located on a different machine. Default 'false'.
+* `upload` : Specifies whether the source file(s) are copied to the Administration Server’s upload directory prior to deployment. Default 'false'.

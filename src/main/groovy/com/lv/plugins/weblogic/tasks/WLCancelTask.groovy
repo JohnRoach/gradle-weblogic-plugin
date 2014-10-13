@@ -3,18 +3,18 @@ package com.lv.plugins.weblogic.tasks
 /**
  * @author Sion Williams
  */
-class WLDeployTask extends AbstractWLDeployTask {
+class WLCancelTask extends AbstractWLDeployTask {
 
     /**
      * The deployment action to perform.
      */
-    static final String ACTION = 'deploy'
+    static final String ACTION = 'cancel'
 
     /**
      * Constructor.
      */
-    WLDeployTask() {
-        super( 'Deploys or redeploys an application or module.' )
+    WLCancelTask() {
+        super( 'Attempt to cancel a running deployment task.' )
     }
 
     @Override
@@ -29,18 +29,6 @@ class WLDeployTask extends AbstractWLDeployTask {
 
         if( getTargets() ) {
             commandArgs << [ targets: getTargets() ]
-        }
-
-        if( getAppversion() ) {
-            commandArgs << [ appversion: getAppversion() ]
-        }
-
-        if( getSource() ) {
-            commandArgs << [ source: getSource() ]
-        }
-
-        if( getUpload() ) {
-            commandArgs << [ upload: getUpload() ]
         }
 
         commandArgs

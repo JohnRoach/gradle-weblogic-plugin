@@ -2,6 +2,11 @@ buildscript {
     repositories {
         maven { url "file://${projectDir}/libs" }
 
+        if( project.hasProperty('internalArtifactRepository') ){
+            maven { url project.internalArtifactRepository }
+        } else {
+            mavenCentral()
+        }
     }
 
     dependencies {
@@ -27,11 +32,9 @@ dependencies {
     weblogic files("${projectDir}/libs/wlfullclient-1036.jar")
 }
 
-println war.archivePath
-
 ext.archiveFile = war.archivePath
 
-wlDeploy {
+weblogic {
     adminurl = 't3://localhost:7001'
     user = 'weblogic'
     password = 'welcome1'
