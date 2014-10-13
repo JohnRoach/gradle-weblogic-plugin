@@ -10,6 +10,7 @@ import org.gradle.api.tasks.TaskAction
 /**
  * Custom Gradle task wrapping the Ant WLDeploy task
  * http://docs.oracle.com/cd/E11035_01/wls100/programming/wldeploy.html
+ * http://docs.oracle.com/cd/E11035_01/wls100/deployment/wldeployer.html
  *
  * @author Sion Williams
  */
@@ -41,6 +42,7 @@ abstract class AbstractWLDeployTask extends DefaultTask {
      * The archive file or exploded directory to deploy.
      */
     @Input
+    @Optional
     String source
 
 
@@ -48,21 +50,22 @@ abstract class AbstractWLDeployTask extends DefaultTask {
      * The list of target servers to which the application is deployed.
      */
     @Input
-    String targets
+    @Optional
+    String targets = 'AdminServer'
 
 
     /**
      * The administrative username.
      */
     @Input
-    String user = 'weblogic'
+    String user
 
 
     /**
      * The administrative password.
      */
     @Input
-    String password = 'welcome1'
+    String password
 
     /**
      * Enable wldeploy debugging messages.

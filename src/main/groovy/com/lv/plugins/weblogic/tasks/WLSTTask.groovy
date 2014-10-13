@@ -10,7 +10,6 @@ import org.gradle.api.tasks.TaskAction
  * Custom Gradle task wrapping the Ant WLST task
  * @author Sion Williams
  */
-@Beta
 class WLSTTask extends DefaultTask{
 
     @Input
@@ -36,6 +35,7 @@ class WLSTTask extends DefaultTask{
     @Optional
     boolean debug = false
 
+    // TODO: Test implementation
     @TaskAction
     void runWlstCommand(){
         ant.taskdef( name: 'wlst',
