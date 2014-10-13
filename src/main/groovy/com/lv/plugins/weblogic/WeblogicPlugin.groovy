@@ -1,6 +1,7 @@
 package com.lv.plugins.weblogic
 
 import com.lv.plugins.weblogic.extension.WLDeployPluginExtension
+import com.lv.plugins.weblogic.tasks.AbstractWLDeployTask
 import com.lv.plugins.weblogic.tasks.WLCancelTask
 import com.lv.plugins.weblogic.tasks.WLDeployTask
 import com.lv.plugins.weblogic.tasks.WLRedeployTask
@@ -40,7 +41,7 @@ class WeblogicPlugin implements Plugin<Project> {
      */
     void addTasks( Project project ){
         def extension = project.extensions.findByName( WL_DEPLOY_EXTENSION )
-        project.tasks.withType( WLDeployTask ){
+        project.tasks.withType( AbstractWLDeployTask ){
             conventionMapping.adminurl = { extension.adminurl }
             conventionMapping.appversion = { extension.appversion }
             conventionMapping.deploymentName = { extension.deploymentName }

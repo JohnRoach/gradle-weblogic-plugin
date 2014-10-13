@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.lv.plugins:gradle-weblogic-plugin:0.2'
+        classpath 'com.lv.plugins:gradle-weblogic-plugin:0.3'
     }
 }
 

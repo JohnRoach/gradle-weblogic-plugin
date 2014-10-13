@@ -43,8 +43,6 @@ class WeblogicPluginSpec extends PluginProjectSpec {
             task != null
             task.group == 'Weblogic'
             task.adminurl == 't3://localhost:7001'
-            task.user == 'weblogic'
-            task.password == 'welcome1'
             task.debug == false
             task.verbose == false
             task.remote == false
