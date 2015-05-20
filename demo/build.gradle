@@ -5,6 +5,7 @@ buildscript {
         if( project.hasProperty('internalArtifactRepository') ){
             maven { url project.internalArtifactRepository }
         } else {
+            maven { url 'http://dl.bintray.com/lv/gradle-plugins/' }
             mavenCentral()
         }
     }
