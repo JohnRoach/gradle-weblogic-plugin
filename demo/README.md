@@ -1,0 +1,3 @@
+# Gradle Weblogic plugin demo
+
+This is a very simple demo project which exercises the plugin using a war file. You will require an instance of WebLogic running, and Oracle have released a Docker image to help provision an environment quickly. The docs for Docker can be found, [here](https://github.com/oracle/docker/tree/master/OracleWebLogic). Note that if you use the Docker implementation you will need to alter the build.gradle to reflect its configuration.
