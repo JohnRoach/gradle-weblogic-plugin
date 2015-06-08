@@ -8,6 +8,11 @@ This plugin is a direct port from the Ant equivalents found at [wldeploy Ant Tas
 ## Build Status
 
 [![Build Status](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin.svg?branch=master)](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin)
+
+## Waffle Board (issues)
+
+[![Stories in Ready](https://badge.waffle.io/Liverpool-Victoria/gradle-weblogic-plugin.svg?label=ready&title=Ready)](http://waffle.io/Liverpool-Victoria/gradle-weblogic-plugin)
+
 ## Usage
 
 To use the plugin, configure your `build.gradle` script and add the plugin:
