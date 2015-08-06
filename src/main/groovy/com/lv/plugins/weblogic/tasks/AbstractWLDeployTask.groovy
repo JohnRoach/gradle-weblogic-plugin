@@ -149,7 +149,7 @@ abstract class AbstractWLDeployTask extends DefaultTask {
      * @return Map of antBuilder arguments
      */
     private def getAntBuilderInput() {
-        antBuilderInput = [:]
+        ext.antBuilderInput = [:]
         antBuilderInput += getConnectionArgs()
         antBuilderInput += getUserCredentialArgs()
         antBuilderInput += getCommonArgs()
