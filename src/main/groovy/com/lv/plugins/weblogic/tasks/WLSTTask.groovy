@@ -1,6 +1,5 @@
 package com.lv.plugins.weblogic.tasks
 
-import com.google.common.annotations.Beta
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional

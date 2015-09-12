@@ -1,4 +1,7 @@
-apply plugin: 'groovy'
+apply from: "${rootDir}/gradle/compileGroovy.gradle"
+apply from: "${rootDir}/gradle/integTest.gradle"
+apply from: "${rootDir}/gradle/codenarc.gradle"
+apply from: "${rootDir}/gradle/jacoco.gradle"
 apply plugin: 'maven'
 
 description 'Gradle plugin for the Weblogic wldeploy ant task'
@@ -21,22 +24,6 @@ dependencies {
     testCompile group: 'com.netflix.nebula', name: 'nebula-test', version: '1.12.+'
     testCompile files("${projectDir}/demo/libs/wlfullclient-1036.jar")
 }
-
-sourceSets {
-    integTest {
-        groovy.srcDir file('src/integTest/groovy')
-        resources.srcDir file('src/integTest/resources')
-        compileClasspath = sourceSets.main.output + configurations.testRuntime
-        runtimeClasspath = output + compileClasspath
-    }
-}
-
-task integTest(type: Test) {
-    testClassesDir = sourceSets.integTest.output.classesDir
-    classpath = sourceSets.integTest.runtimeClasspath
-}
-
-check.dependsOn integTest
 
 /**
  * FOR DEMO PROJECT
