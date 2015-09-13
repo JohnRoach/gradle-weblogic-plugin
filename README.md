@@ -12,7 +12,7 @@ This plugin is a direct port from the Ant equivalents found at [wldeploy Ant Tas
 
 ## Usage
 
-To use the plugin, configure your `build.gradle` script as per the instructions, (here)[https://plugins.gradle.org/plugin/com.lv.weblogic].
+To use the plugin, configure your `build.gradle` script as per the instructions, [here](https://plugins.gradle.org/plugin/com.lv.weblogic).
 
 Note that the weblogic client is not provided by this plugin and will need to be added independently. See below:
 
