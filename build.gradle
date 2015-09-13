@@ -1,3 +1,7 @@
+plugins {
+    id 'com.gradle.plugin-publish' version '0.9.1'
+}
+
 apply from: "${rootDir}/gradle/compileGroovy.gradle"
 apply from: "${rootDir}/gradle/integTest.gradle"
 apply from: "${rootDir}/gradle/codenarc.gradle"
@@ -34,6 +38,20 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository(url: "file://${project.rootDir}/demo/libs")
+        }
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/Liverpool-Victoria/gradle-weblogic-plugin'
+    vcsUrl = 'https://github.com/Liverpool-Victoria/gradle-weblogic-plugin'
+    description = 'Gradle plugin for the Weblogic wldeploy ant task'
+    tags = ['weblogic']
+
+    plugins {
+        weblogicPlugin {
+            id = 'com.lv.weblogic'
+            displayName = 'Gradle plugin for the Weblogic wldeploy ant task'
         }
     }
 }

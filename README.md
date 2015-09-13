@@ -2,9 +2,6 @@
 
 This plugin is a direct port from the Ant equivalents found at [wldeploy Ant Task Reference](http://docs.oracle.com/cd/E13222_01/wls/docs92/programming/wldeploy.html)
 
-## Latest Version
-[ ![Download](https://api.bintray.com/packages/lv/gradle-plugins/gradle-weblogic-plugin/images/download.svg) ](https://bintray.com/lv/gradle-plugins/gradle-weblogic-plugin/_latestVersion)
-
 ## Build Status
 
 [![Build Status](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin.svg?branch=master)](https://travis-ci.org/Liverpool-Victoria/gradle-weblogic-plugin)
@@ -15,19 +12,11 @@ This plugin is a direct port from the Ant equivalents found at [wldeploy Ant Tas
 
 ## Usage
 
-To use the plugin, configure your `build.gradle` script and add the plugin:
+To use the plugin, configure your `build.gradle` script as per the instructions, (here)[https://plugins.gradle.org/plugin/com.lv.weblogic].
+
+Note that the weblogic client is not provided by this plugin and will need to be added independently. See below:
+
 ```groovy
-    buildscript {
-        repositories {
-            mavenCentral()
-            maven { url 'http://dl.bintray.com/lv/gradle-plugins/' }
-        }
-        dependencies {
-            classpath 'com.lv.plugins:gradle-weblogic-plugin:<VERSION>'
-        }
-    }
-    apply plugin: 'com.lv.weblogic'
-    
     dependencies {
         weblogic files('/path/to/wlfullclient.jar')
     }
