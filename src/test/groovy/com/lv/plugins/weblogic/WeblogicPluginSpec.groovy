@@ -115,12 +115,9 @@ class WeblogicPluginSpec extends PluginProjectSpec {
             task.description == 'Makes an application inactive and unavailable administration and client requests.'
     }
 
-    def "project object has antBuilderInput property"() {
-        setup:
-        def ext = project.ext.antBuilderInput
-
+    def "antBuilderInput not null"(){
         expect:
-        ext != null
+        project.ext.antBuilderInput
     }
 
     @Ignore( "TODO" )
