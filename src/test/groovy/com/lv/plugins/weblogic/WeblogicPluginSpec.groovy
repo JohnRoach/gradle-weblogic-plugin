@@ -115,11 +115,6 @@ class WeblogicPluginSpec extends PluginProjectSpec {
             task.description == 'Makes an application inactive and unavailable administration and client requests.'
     }
 
-    def "antBuilderInput not null"(){
-        expect:
-        project.ext.antBuilderInput
-    }
-
     @Ignore( "TODO" )
     def "apply creates wlDistribute task" () {
         setup:

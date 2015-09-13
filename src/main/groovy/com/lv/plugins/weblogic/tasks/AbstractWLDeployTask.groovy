@@ -112,7 +112,7 @@ abstract class AbstractWLDeployTask extends DefaultTask {
                 classname: 'weblogic.ant.taskdefs.management.WLDeploy',
                 classpath: project.configurations.weblogic.asPath )
 
-        getAntBuilderInput()
+        def antBuilderInput = getAntBuilderInput()
 
         logger.quiet "*****************************************"
         logger.quiet "Application name : ${antBuilderInput['name']}"
@@ -149,11 +149,12 @@ abstract class AbstractWLDeployTask extends DefaultTask {
      * @return Map of antBuilder arguments
      */
     private def getAntBuilderInput() {
-        ext.antBuilderInput = [:]
+        def antBuilderInput = [:]
         antBuilderInput += getConnectionArgs()
         antBuilderInput += getUserCredentialArgs()
         antBuilderInput += getCommonArgs()
         antBuilderInput += getCommandAndOptions()
+        antBuilderInput
     }
 
     /**

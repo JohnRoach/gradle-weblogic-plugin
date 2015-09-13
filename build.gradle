@@ -6,7 +6,7 @@ apply plugin: 'maven'
 
 description 'Gradle plugin for the Weblogic wldeploy ant task'
 group 'com.lv.plugins'
-version = '0.3'
+version = '0.4'
 
 repositories {
     if( project.hasProperty('internalArtifactRepository') ){
