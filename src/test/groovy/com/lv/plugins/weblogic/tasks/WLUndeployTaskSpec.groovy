@@ -8,47 +8,39 @@ import spock.lang.Specification
 /**
  * @author Sion Williams
  */
-class WLDeployTaskSpec extends Specification {
+class WLUndeployTaskSpec extends Specification {
     Project project
 
     void setup() {
         project = ProjectBuilder.builder().build()
     }
 
-    def "Adds WLDeploy task"() {
+    def "Adds WLUndeployTask task"() {
         expect:
             project.tasks.findByName( 'wlTest' ) == null
 
         when:
-            project.task( 'wlTest', type: WLDeployTask ) {
+            project.task( 'wlTest', type: WLUndeployTask ) {
                 adminurl = 'test'
-                appversion = 'test'
                 deploymentName = 'test'
                 source = 'test'
                 targets = 'test'
                 user = 'test'
                 password = 'test'
-                debug = false
-                verbose = false
-                remote = false
-                upload = false
+                appversion = '1.0'
             }
 
         then:
             Task task = project.tasks.findByName( 'wlTest' )
             task.group == 'Weblogic'
-            task.description == 'Deploys or redeploys an application or module.'
+            task.description == 'Stops the deployment unit and removes staged files from target servers.'
             task.adminurl == 'test'
-            task.appversion == 'test'
             task.deploymentName == 'test'
             task.source == 'test'
             task.targets == 'test'
             task.user == 'test'
             task.password == 'test'
-            task.debug == false
-            task.verbose == false
-            task.remote == false
-            task.upload == false
+            task.appversion == '1.0'
     }
 
 }
